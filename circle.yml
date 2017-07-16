@@ -10,4 +10,4 @@ test:
     - wget -O PHP7.tar.gz https://dl.bintray.com/pocketmine/PocketMine/PHP_7.0.6_x86-64_Linux.tar.gz --no-check-certificate
     - tar -xf PHP7.tar.gz
     - bin/php7/bin/php ci.php
-    - cp -R plugins/DevTools/* $CIRCLE_ARTIFACTS
+    - cp -R plugins/BDevTools/* $CIRCLE_ARTIFACTS
