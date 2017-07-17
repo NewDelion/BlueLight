@@ -836,9 +836,9 @@ class Server{
 		$found = null;
 		$name = strtolower($name);
 		$delta = PHP_INT_MAX;
-		foreach($this->getOnlinePlayers() as $player){
-			if(stripos($player->getName(), $name) === 0){
-				$curDelta = strlen($player->getName()) - strlen($name);
+		foreach($this->getOnlinePlayers() as $playerName => $player){
+			if(stripos($playerName, $name) === 0){
+				$curDelta = strlen($playerName) - strlen($name);
 				if($curDelta < $delta){
 					$found = $player;
 					$delta = $curDelta;
@@ -2407,12 +2407,12 @@ class Server{
 	public function addOnlinePlayer(Player $player){
 		$this->updatePlayerListData($player->getUniqueId(), $player->getId(), $player->getDisplayName(), $player->getSkinId(), $player->getSkinData());
 
-		$this->playerList[$player->getRawUniqueId()] = $player;
+		$this->playerList[$player->getName()] = $player;
 	}
 
 	public function removeOnlinePlayer(Player $player){
-		if(isset($this->playerList[$player->getRawUniqueId()])){
-			unset($this->playerList[$player->getRawUniqueId()]);
+		if(isset($this->playerList[$player->getName()])){
+			unset($this->playerList[$player->getName()]);
 
 			$pk = new PlayerListPacket();
 			$pk->type = PlayerListPacket::TYPE_REMOVE;
