@@ -52,10 +52,7 @@ abstract class DataPacket extends Packet{
 		$this->seqNumber = $this->getLTriad();
 
 		while(!$this->feof()){
-			$offset = 0;
-			$data = substr($this->buffer, $this->offset);
-			$packet = EncapsulatedPacket::fromBinary($data, false, $offset);
-			$this->offset += $offset;
+			$packet = EncapsulatedPacket::fromBinary($this->buffer, false, $this->offset);
 			if(strlen($packet->buffer) === 0){
 				break;
 			}
